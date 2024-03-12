@@ -39,13 +39,3 @@ services:
       - "./docker/mysql:/var/lib/mysql"
     ports:
       - "33062:3306"
-
-  node:
-    container_name: node_laravel9
-    build:
-      context: .
-      dockerfile: docker/node/node.docker
-    volumes:
-      - ./:/var/www
-    tty: true
-
