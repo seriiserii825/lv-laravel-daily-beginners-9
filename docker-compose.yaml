@@ -30,11 +30,10 @@ services:
       - mysql
 
   mysql:
-    container_name: mysql_laravel_9
+    container_name: mysql_laravel9
     image: mysql:8.3.0
     restart: always
     environment:
-      # - "MYSQL_ROOT_PASSWORD: root;"
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
@@ -44,9 +43,9 @@ services:
       - "33062:3306"
     command: --authentication_policy=mysql_native_password
 
-  app:
+  phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
+    container_name: phpmyadmin_laravel9
     restart: always
     ports:
      - '8080:80'
