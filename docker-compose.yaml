@@ -34,7 +34,7 @@ services:
     image: mysql:8.3.0
     restart: always
     environment:
-      # - "MYSQL_ROOT_PASSWORD=root;"
+      # - "MYSQL_ROOT_PASSWORD: root;"
       MYSQL_ROOT_USER: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
@@ -42,17 +42,19 @@ services:
       - "./docker/mysql:/var/lib/mysql"
     ports:
       - "33062:3306"
-    # command: --authentication_policy=mysql_native_password
+    command: --authentication_policy=mysql_native_password
 
   app:
-    depends_on:
-     - mysql
     image: phpmyadmin/phpmyadmin
     container_name: phpmyadmin
     restart: always
     ports:
      - '8080:80'
     environment:
+      MAX_EXECUTION_TIME: 600
+      UPLOAD_LIMIT: 800M
       PMA_HOST: mysql
-      # PMA_USER: root
-      # PMA_PASSWORD: root
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    depends_on:
+     - mysql
