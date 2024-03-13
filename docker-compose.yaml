@@ -11,7 +11,7 @@ services:
       - ./:/var/www
       # - ./docker/nginx/ssl:/etc/nginx/ssl
     ports:
-      - "8087:80"
+      - "8088:80"
     links:
       - php-fpm
 
@@ -34,8 +34,8 @@ services:
     image: mysql:8.3.0
     restart: always
     environment:
-      MYSQL_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: root
+      # MYSQL_ROOT_USER: root
+      # MYSQL_ROOT_PASSWORD: root
       MYSQL_PASSWORD: root
     volumes:
       - "./docker/mysql:/var/lib/mysql"
@@ -48,7 +48,7 @@ services:
     container_name: phpmyadmin_laravel9
     restart: always
     ports:
-     - '8080:80'
+     - '8084:80'
     environment:
       MAX_EXECUTION_TIME: 600
       UPLOAD_LIMIT: 800M
