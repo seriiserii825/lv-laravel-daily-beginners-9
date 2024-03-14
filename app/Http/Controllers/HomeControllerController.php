@@ -6,7 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class HomeControllerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +16,13 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();       //
-        return response()->json($categories); //
+        /* $posts = Post::when(request('category_id'), function($query) { */
+        /*     $query->where('category_id', request('category_id')); */
+        /* })->get(); */
+        return response()->json([
+            'categories' => $categories,
+            /* 'posts' => $posts */
+        ]); //
     }
 
     /**

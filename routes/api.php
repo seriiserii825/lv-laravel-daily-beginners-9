@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\HomeControllerController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,5 +21,6 @@ use Illuminate\Support\Facades\Route;
 /* }); */
 
 Route::apiResources([
+    'home' => HomeControllerController::class,
     'category' => CategoryController::class,
 ]);
