@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\HomeControllerController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Front\HomeFrontController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 /*     return $request->user(); */
 /* }); */
 
-Route::apiResources([
-    'home' => HomeControllerController::class,
-    'category' => CategoryController::class,
-]);
+Route::get('home', [HomeFrontController::class, 'index']);
+/* Route::apiResources([ */
+/*     'home' => HomeControllerController::class, */
+/*     'category' => CategoryController::class, */
+/* ]); */
