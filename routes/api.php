@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Front\HomeFrontController;
+use App\Http\Controllers\PostFrontController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 /* }); */
 
 Route::get('home', [HomeFrontController::class, 'index']);
+Route::get('post', [PostFrontController::class, 'index']);
 /* Route::apiResources([ */
 /*     'home' => HomeControllerController::class, */
 /*     'category' => CategoryController::class, */
