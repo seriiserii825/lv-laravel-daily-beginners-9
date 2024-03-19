@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+
 Route::get('home', [HomeFrontController::class, 'index']);
 Route::get('post', [PostFrontController::class, 'index']);
 
