@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Login\StoreRequest as LoginStoreRequest;
 use App\Http\Requests\Register\StoreRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,20 +24,16 @@ class AuthController extends Controller
             'message' => 'Successfully created user!',
         ], 201);
     }
-    public function login()
+    public function login(LoginStoreRequest $request)
     {
-        $credentials = request(['email', 'password']);
-
-        if (!$token = auth()->attempt($credentials)) {
+        $user = User::where('email', $request->email)->first();
+        if (!$user || !\Hash::check($request->password, $user->password)) {
             return response()->json([
-                'message' => 'The given data was invalid.',
                 'errors' => [
                     'password' => ['The provided credentials are incorrect.']
                 ]
             ], 401);
         }
-
-        $user = User::where('email', $credentials['email'])->first();
         $auth_token = $user->createToken('auth-token')->plainTextToken;
         return response()->json([
             'access_token' => $auth_token,
