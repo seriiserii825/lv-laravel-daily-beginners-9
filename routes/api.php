@@ -29,6 +29,7 @@ Route::get('post', [PostFrontController::class, 'index']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     /* Route::get('user', [AuthController::class, 'user']); */
     Route::post('logout', [AuthController::class, 'logout']);
+    Route::get('user', [AuthController::class, 'user']);
 });
 /* Route::apiResources([ */
 /*     'home' => HomeControllerController::class, */
