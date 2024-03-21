@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Front\HomeFrontController;
 use App\Http\Controllers\PostFrontController;
@@ -30,6 +31,11 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     /* Route::get('user', [AuthController::class, 'user']); */
     Route::post('logout', [AuthController::class, 'logout']);
     Route::get('user', [AuthController::class, 'user']);
+    Route::group(['prefix' => 'admin'], function () {
+        Route::apiResources([
+            'category' => CategoryController::class,
+        ]);
+    });
 });
 /* Route::apiResources([ */
 /*     'home' => HomeControllerController::class, */
