@@ -17,13 +17,10 @@ class PostFrontController extends Controller
     {
         $posts_query = Post::when(request('category_id'), function ($query) {
             $query->where('category_id', request('category_id'));
-        })->get();
+        })->paginate(2);
 
         $posts = PostResource::collection($posts_query);
 
-        return response()->json([
-            'total' => $posts->count(),
-            'posts' => $posts
-        ], 200);
+        return $posts;
     }
 }

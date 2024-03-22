@@ -12,7 +12,7 @@ class HomeFrontController extends Controller
     public function index()
     {
         $categories = Category::has('posts')->get();       //
-        $posts = PostResource::collection(Post::latest()->get());      //
+        $posts = PostResource::collection(Post::paginate(4));      //
         return response()->json([
             'categories' => $categories,
             'posts' => $posts
