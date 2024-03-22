@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CategoryController as ControllersCategoryController;
 use App\Http\Controllers\Front\HomeFrontController;
 use App\Http\Controllers\PostFrontController;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
 
-Route::get('home', [HomeFrontController::class, 'index']);
+Route::get('category', [ControllersCategoryController::class, 'index']);
 Route::get('post', [PostFrontController::class, 'index']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
