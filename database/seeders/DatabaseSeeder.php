@@ -16,10 +16,11 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\User::factory()->create([
+            'name' => 'Test User',
+            'email' => 'seriiburduja@gmail.com',
+            'password' => bcrypt('serii1981'),
+        ]);
         $this->call([
             CategorySeeder::class,
             PostSeeder::class,

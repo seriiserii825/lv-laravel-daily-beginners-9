@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\CategoryController as ControllersCategoryController;
@@ -35,6 +36,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::group(['prefix' => 'admin'], function () {
         Route::apiResources([
             'category' => CategoryController::class,
+            'post' => PostController::class,
         ]);
     });
 });
