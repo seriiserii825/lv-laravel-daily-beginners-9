@@ -16,9 +16,17 @@ class PostController extends Controller
      */
     public function index()
     {
+        $sort_field = request('sort_field', 'created_at');
+        if (!in_array($sort_field, ['title', 'created_at'])) {
+            $sort_field = 'created_at';
+        }
+        $sort_direction = request('sort_direction', 'desc');
+        if (!in_array($sort_direction, ['asc', 'desc'])) {
+            $sort_direction = 'desc';
+        }
         $posts = Post::when(request('category_id', '') !== '', function($query){
             $query->where('category_id', request('category_id'));
-        })->paginate(4);
+        })->orderBy($sort_field, $sort_direction)->paginate(4);
         return PostResource::collection($posts);
     }
 
