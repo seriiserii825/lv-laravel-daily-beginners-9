@@ -16,7 +16,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return PostResource::collection(Post::paginate(4));
+        $posts = Post::when(request('category_id', '') !== '', function($query){
+            $query->where('category_id', request('category_id'));
+        })->paginate(4);
+        return PostResource::collection($posts);
     }
 
     /**
