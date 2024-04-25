@@ -3,8 +3,8 @@
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Api\Admin\CategoryController;
 use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\CategoryAdminController;
 use App\Http\Controllers\CategoryController as ControllersCategoryController;
-use App\Http\Controllers\Front\HomeFrontController;
 use App\Http\Controllers\PostFrontController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user', [AuthController::class, 'user']);
     Route::group(['prefix' => 'admin'], function () {
         Route::apiResources([
+            'category_admin' => CategoryAdminController::class,
             'category' => CategoryController::class,
             'post' => PostController::class,
         ]);
