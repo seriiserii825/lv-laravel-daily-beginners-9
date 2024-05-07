@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Category\StoreRequest;
+use App\Http\Requests\Category\UpdateRequest;
 use App\Http\Resources\CategoryResourceResource;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -58,9 +59,11 @@ class CategoryAdminController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->update($request->validated());
+        return new CategoryResourceResource($category);
     }
 
     /**
