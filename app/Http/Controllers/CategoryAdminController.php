@@ -49,7 +49,8 @@ class CategoryAdminController extends Controller
      */
     public function show($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        return new CategoryResourceResource($category);
     }
 
     /**
@@ -74,6 +75,8 @@ class CategoryAdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::findOrFail($id);
+        $category->delete();
+        return response()->noContent();
     }
 }
