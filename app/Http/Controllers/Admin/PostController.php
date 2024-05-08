@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\UpdateRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -27,7 +28,7 @@ class PostController extends Controller
         }
         $posts = Post::when(request('category_id', '') !== '', function($query){
             $query->where('category_id', request('category_id'));
-        })->orderBy($sort_field, $sort_direction)->paginate(4);
+        })->orderBy($sort_field, $sort_direction)->paginate(10);
         return PostResource::collection($posts);
     }
 
@@ -51,7 +52,8 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return new PostResource($post);
     }
 
     /**
@@ -61,9 +63,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->update($request->validated());
+        return new PostResource($post);
     }
 
     /**
@@ -74,6 +78,7 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Post::destroy($id);
+        return response()->json(['status' => true]);
     }
 }
